@@ -71,7 +71,7 @@ Element('div')          // <div>
     .end()              // </div>
 ```
 
-Another piece of syntactic sugar provided by the library is `root()` which automatically closes all trailing elements. For example, consider this set of three nested `div` elements:
+Another piece of syntactic sugar provided by the library is `top()` which automatically closes all trailing elements. For example, consider this set of three nested `div` elements:
 
 ```js
 Element('div')
@@ -81,13 +81,13 @@ Element('div')
     .end()
 ```
 
-Using `root()`, we can simplify this to:
+Using `top()`, we can simplify this to:
 
 ```js
 Element('div')
     .Element('div')
         .Element('div')
-        .root()
+        .top()
 ```
 
 
