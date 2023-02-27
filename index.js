@@ -1,6 +1,6 @@
-export const element = name => document.createElement(name)
+export const Element = name => document.createElement(name)
 
-HTMLElement.prototype.element = function(name) { return this.appendChild(document.createElement(name)) }
+HTMLElement.prototype.Element = function(name) { return this.appendChild(document.createElement(name)) }
 HTMLElement.prototype.text = function(text) { return (this.innerText = text, this) }
 HTMLElement.prototype.html = function(html) { return (this.innerHTML = html, this) }
 HTMLElement.prototype.set = function(...a) { return (this.setAttribute(...a), this) }
