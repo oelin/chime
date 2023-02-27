@@ -132,11 +132,15 @@ The following functions are prototyped on `HTMLElement`:
 Finally, the `use()` API can be used to add new functions to the prototype of `HTMLElement`. This is the easiest way to develop plug-ins for Chime. For example, to implement data-binding between input elements and refs, you could write a simple `bind` plug-in:
 
 ```js
-use('bind', function(ref) {
-    ref.subscribe(value => this.set('value', value)) // Update the `value` attribute.
-    this.on('change', value => ref(value)) // Update the ref on input.
+use('bind', function(state) {
+    this.oninput = value => state.set(value)                    // View -> State.
+    state.subscribe(value => this.setAttribute('value', value)) // State -> View.
+    
+    return this
 })
 ```
+
+> Note that when writing plug-ins, you should typically return the current element to allow for further function chaining.
 
 This function can then be used when constructing views:
 
