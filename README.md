@@ -24,26 +24,6 @@ const App = Element('div')
             .top()
 ```
 
-```js
-const App = Element('div')
-    .Element('input')
-        .set('placholder', 'username')
-        .set('value', username)
-        .end()
-    .Element('input')
-        .set('placeholder', 'password')
-        .set('value', password)
-        .end()
-    .Element('div')
-        .Element('h6')
-            .text('About you')
-            .end()
-        .Element('div')
-            .Element('textarea')
-            .set('class', 'bio')
-            .top()
-```
-
 <img src='https://github.com/oelin/chime/blob/main/images/form.png'>
 
 
