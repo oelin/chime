@@ -27,6 +27,6 @@ function App() {
                     .set('class', 'avatar')
                     .set('title', 'Upload an avatar.')
                     .set('type', 'file')
-                    .all()
+                    .top()
 }
 ```
