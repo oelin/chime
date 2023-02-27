@@ -26,10 +26,5 @@ function App() {
                     .set('class', 'bio')
                     .set('title', 'Enter your bio.')
                     .end()
-                .element('input')
-                    .set('class', 'avatar')
-                    .set('title', 'Upload an avatar.')
-                    .set('type', 'file')
-                    .top()
 }
 ```
