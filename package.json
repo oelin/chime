@@ -1,0 +1,25 @@
+{
+  "name": "chime",
+  "version": "1.0.6",
+  "description": "A tiny, declarative UI framework.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oelin/chime.git"
+  },
+  "keywords": [
+    "ui",
+    "delarative-programming",
+    "functional-programming"
+  ],
+  "author": "oelin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oelin/chime/issues"
+  },
+  "homepage": "https://github.com/oelin/chime#readme"
+}
