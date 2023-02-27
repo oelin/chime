@@ -1,6 +1,6 @@
 # Chime
 
-An elegant, declarative DOM framework.
+A tiny declarative UI library.
 
 ```js
 const App = element('div')
