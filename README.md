@@ -4,8 +4,10 @@ An elegant declarative DOM framework.
 
 
 ```js
-function App() {
+import { element } from 'chime'
 
+
+function App() {
     return element('div')
         .element('input')
             .set('placholder', 'username')
