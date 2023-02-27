@@ -1,18 +1,18 @@
 # Chime
 
-A tiny, declarative UI library.
+A tiny, declarative UI framework.
 
 **[Getting Started](#getting-started) | [Installation](#installation) | [API](#api)**
 
 ```js
 const App = Element('div')
     .Element('input')
-        .set('placholder', 'username')
-        .set('value', username)
+        .attribute('placholder', 'username')
+        .attribute('value', username)
         .end()
     .Element('input')
-        .set('placeholder', 'password')
-        .set('value', password)
+        .attribute('placeholder', 'password')
+        .attribute('value', password)
         .end()
     .Element('div')
         .Element('h6')
@@ -20,7 +20,7 @@ const App = Element('div')
             .end()
         .Element('div')
             .Element('textarea')
-            .set('class', 'bio')
+            .attribute('class', 'bio')
             .top()
 ```
 
@@ -29,7 +29,7 @@ const App = Element('div')
  
 ## Getting Started 
 
-Chime is a tiny UI library which makes use of function chaining to construct UIs in a declarative style. The core library only contains a few DOM functions however it can be very easily extended via plug-ins using the `use()` API (for example to support two-way data binding). While Chime doesn't allow you to create views in HTML syntax, functional chaining allows you to achieve comparable succinctness while also being declarative.
+Chime is a tiny UI library which makes use of function chaining to construct UIs in a declarative style. The core library only contains a few DOM functions however it can be very easily extended via plugins using the `use()` API (for example to support two-way data binding). While Chime doesn't allow you to create views in HTML syntax, functional chaining allows you to achieve comparable succinctness while also being declarative.
 
 
 ### Constructing Views
@@ -90,18 +90,18 @@ Element('div')
 
 ### Manipulating Elements
 
-Apart from constructing views, Chime also allows you to easily modify the content and/or attributes of individual DOM elements. The `set()` function can be used to set an attribute on an element. For example:
+Apart from constructing views, Chime also allows you to easily modify the content and/or attributes of individual DOM elements. The `attribute()` function can be used to set an attribute on an element. For example:
 
 ```js
-Element('div').set('class', 'foo') // <div class='foo'></div>
+Element('div').attribute('class', 'foo') // <div class='foo'></div>
 ```
 
-Another important function is `on()` which allows you to add event listeners to a DOM element. For example:
+Another important function is `event()` which allows you to add event listeners to elements. For example:
 
 ```js
 Element('button')
    .text('Click me!')
-   .on('click', () => console.log('Button clicked!'))
+   .event('click', () => console.log('Button clicked!'))
 ```
 
 
@@ -114,42 +114,59 @@ npm i chime
 
 ## API
 
-Most of the functions exported by the library are faily self-explanatory.
+Most of the functions exported by the library are fairly self-explanatory.
 
 * `Element(name: String) -> HTMLElement` - creates a new element (an alias of `document.createElement`).
-
 
 The following functions are prototyped on `HTMLElement`:
 
 * `Element(name: String) -> HTMLElement` - adds a new child element to the current element.
 
-* `text(text: String) -> HTMLElement` - sets the `innerText` of the current element.
+* `attribute(name: String, value: String) -> HTMLElement` - sets an attribute on the current element.
 
-* `set(attribute: String, value: Any) -> HTMLElement` - sets an attribute on the current element.
+* `text(value: String) -> HTMLElement` - sets the `innerText` of the current element.
 
-* `on(event: String, callback: Function) -> HTMLElement` - registers an event listener on the current element.
+* `event(name: String, callback: Function) -> HTMLElement` - registers an event listener on the current element.
 
-Finally, the `use()` API can be used to add new functions to the prototype of `HTMLElement`. This is the easiest way to develop plug-ins for Chime. For example, to implement data-binding between input elements and refs, you could write a simple `bind` plug-in:
+Finally, the `use()` API can be used to add new functions to the prototype of `HTMLElement`. This is the easiest way to develop plugins for Chime. For example, to implement data-binding:
 
 ```js
-use('bind', function(state) {
-    this.oninput = value => state.set(value)                    // View -> State.
-    state.subscribe(value => this.setAttribute('value', value)) // State -> View.
+class Variable {
+    constructor(value) {
+        this.value = value
+        this.subscribers = []
+    }
+
+    set(value) {
+        this.value = value
+        this.subscribers.forEach(callback => callback(value))
+    }
+    
+    subscribe(callback) {
+        this.subscribers.push(callback)
+        callback(this.value)
+    }
+}
+
+
+use('binding', function(variable) {
+    this.oninput = value => variable.set(value)                    // View -> State.
+    variable.subscribe(value => this.setAttribute('value', value)) // State -> View.
     
     return this
 })
 ```
 
-> Note that when writing plug-ins, you should typically return the current element to allow for further function chaining.
+> Note that when writing plugins, you should typically return the current element to allow for further function chaining.
 
 This function can then be used when constructing views:
 
 ```js
 function App() {
-    const username = ref('Alice')
+    const username = new Variable('Alice')
     
     return Element('div')
-        .Element('input').bind(username)
+        .Element('input').binding(username)
         .top()
 }
 ```
