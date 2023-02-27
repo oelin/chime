@@ -61,7 +61,7 @@ Element('div')       // <div>
     .end()           // </div>
 ```
 
-To reduce boilerplate, Chime also provides the `top()` function which automatically closes all unclosed tags. For example, consider this set of nested `div` elements:
+To reduce boilerplate, Chime also provides the `top()` function which returns the root element of a tree. For example, consider this set of nested `div` elements:
 
 ```js
 Element('div')
@@ -76,7 +76,7 @@ Element('div')
     .end()
 ```
 
-Using `top` we can divide the line count in half:
+Using `top()` we can divide the line count in half:
 
 ```js
 Element('div')
