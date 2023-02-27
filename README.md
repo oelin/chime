@@ -24,7 +24,7 @@ const App = Element('div')
             .top()
 ```
 
-<img src='https://github.com/oelin/chime/blob/main/images/form.png'>
+<img src='https://github.com/oelin/chime/blob/main/images/form.png' width=100%>
 
  
 ## Getting Started 
@@ -118,13 +118,10 @@ Most of the functions exported by the library are faily self-explanatory.
 
 * `Element(name: String) -> HTMLElement` - creates a new element (an alias of `document.createElement`).
 
-* `Atom(name: String[, text: String]) -> HTMLElement` - creates a new atomic element (equivalent to `Atom(name).text(text).end()`).
 
 The following functions are prototyped on `HTMLElement`:
 
 * `Element(name: String) -> HTMLElement` - adds a new child element to the current element.
-
-* `Atom(name: String) -> HTMLElement` - adds a new atomic child element the current element.
 
 * `text(text: String) -> HTMLElement` - sets the `innerText` of the current element.
 
