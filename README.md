@@ -1,14 +1,9 @@
 # Chime
 
-An elegant declarative DOM framework.
-
+An elegant, declarative DOM framework.
 
 ```js
-import { element } from 'chime'
-
-
-function App() {
-    return element('div')
+const App = element('div')
         .element('input')
             .set('placholder', 'username')
             .set('value', username)
@@ -26,7 +21,6 @@ function App() {
                     .set('class', 'bio')
                     .set('title', 'Enter your bio.')
                     .top()
-}
 ```
 
 <img src='https://github.com/oelin/chime/blob/main/images/form.png'>
