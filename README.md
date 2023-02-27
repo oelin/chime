@@ -148,6 +148,7 @@ function App() {
     const username = ref('Alice')
     
     return Element('div')
-        .Atom('input').bind(username)
+        .Element('input').bind(username)
+        .top()
 }
 ```
