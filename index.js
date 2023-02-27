@@ -1,14 +1,12 @@
-export const Element = elementName => document.createElement(elementName)
-export const use = (pluginName, pluginCallback) => HTMLElement.prototype[pluginName] = pluginCallback
+export const Element = name => document.createElement(name)
+export const use = (name, value) => HTMLElement.prototype[name] = value
 
 
 // Default plug-ins.
 
-use('Element', function(elementName) { return this.appendChild(document.createElement(elementName)) }
-use('Atom', function(elementName, elementText) { return (this.appendChild(document.createElement(elementName)).innerText = elementText ?? '', this) }
-
-use('text', function(elementText) { return (this.innerText = elementText, this) }
-use('set', function(attributeName, attributeText) { return (this.setAttribute(attributeName, attributeText), this) }
-use('when', function(eventName, eventCallback) { return (this.addEventListener(eventName, eventCallback), this) }
+use('Element', function(name) { return this.appendChild(document.createElement(name)) }
+use('attribute', function(name, value) { return (this.setAttribute(name, value), this) }
+use('event', function(name, value) { return (this.addEventListener(name, value), this) }
+use('text', function(value) { return (this.innerText = value, this) }
 use('end', function() { return this.parentElement }
-use('root', function() { return this.getRootNode() }
+use('top', function() { return this.getRootNode() }
