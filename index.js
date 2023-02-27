@@ -1,9 +1,14 @@
-export const Element = name => document.createElement(name)
+export const Element = elementName => document.createElement(elementName)
+export const use = (pluginName, pluginCallback) => HTMLElement.prototype[pluginName] = pluginCallback
 
-HTMLElement.prototype.Element = function(name) { return this.appendChild(document.createElement(name)) }
-HTMLElement.prototype.text = function(text) { return (this.innerText = text, this) }
-HTMLElement.prototype.html = function(html) { return (this.innerHTML = html, this) }
-HTMLElement.prototype.set = function(...a) { return (this.setAttribute(...a), this) }
-HTMLElement.prototype.on = function(...a) { return (this.addEventListener(...a), this) }
-HTMLElement.prototype.end = function() { return this.parentElement }
-HTMLElement.prototype.top = function() { return this.getRootNode() }
+
+// Default plug-ins.
+
+use('Element', function(elementName) { return this.appendChild(document.createElement(elementName)) }
+use('Atom', function(elementName, elementText) { return (this.appendChild(document.createElement(elementName)).innerText = elementText ?? '', this) }
+
+use('text', function(elementText) { return (this.innerText = elementText, this) }
+use('set', function(attributeName, attributeText) { return (this.setAttribute(attributeName, attributeText), this) }
+use('when', function(eventName, eventCallback) { return (this.addEventListener(eventName, eventCallback), this) }
+use('end', function() { return this.parentElement }
+use('root', function() { return this.getRootNode() }
