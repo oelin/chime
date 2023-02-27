@@ -1,4 +1,5 @@
-# chime
+# Chime
+
 An elegant declarative DOM framework.
 
 
