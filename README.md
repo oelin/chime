@@ -151,6 +151,6 @@ function App() {
     const username = ref('Alice')
     
     return Element('div')
-        .Atom('input').bind(ref)
+        .Atom('input').bind(username)
 }
 ```
