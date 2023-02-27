@@ -5,14 +5,14 @@ A tiny, declarative UI framework.
 **[Getting Started](#getting-started) | [Installation](#installation) | [API](#api)**
 
 ```js
-const App = Element('div')
+const App = element('div')
     .Element('input')
-        .attribute('placholder', 'username')
-        .attribute('value', username)
+        .set('placholder', 'username')
+        .set('value', username)
         .end()
     .Element('input')
-        .attribute('placeholder', 'password')
-        .attribute('value', password)
+        .set('placeholder', 'password')
+        .set('value', password)
         .end()
     .Element('div')
         .Element('h6')
@@ -20,8 +20,8 @@ const App = Element('div')
             .end()
         .Element('div')
             .Element('textarea')
-            .attribute('class', 'bio')
-            .top()
+                .set('class', 'bio')
+                .top()
 ```
 
 <img src='https://github.com/oelin/chime/blob/main/images/form.png' width=100%>
@@ -93,15 +93,15 @@ Element('div')
 Apart from constructing views, Chime also allows you to easily modify the content and/or attributes of individual DOM elements. The `attribute()` function can be used to set an attribute on an element. For example:
 
 ```js
-Element('div').attribute('class', 'foo') // <div class='foo'></div>
+Element('div').set('class', 'foo') // <div class='foo'></div>
 ```
 
-Another important function is `event()` which allows you to add event listeners to elements. For example:
+Another important function is `when()` which allows you to add event listeners to elements. For example:
 
 ```js
 Element('button')
    .text('Click me!')
-   .event('click', () => console.log('Button clicked!'))
+   .when('click', () => console.log('Button clicked!'))
 ```
 
 
@@ -122,11 +122,11 @@ The following functions are prototyped on `HTMLElement`:
 
 * `Element(name: String) -> HTMLElement` - adds a new child element to the current element.
 
-* `attribute(name: String, value: String) -> HTMLElement` - sets an attribute on the current element.
+* `set(name: String, value: String) -> HTMLElement` - sets an attribute on the current element.
 
 * `text(value: String) -> HTMLElement` - sets the `innerText` of the current element.
 
-* `event(name: String, callback: Function) -> HTMLElement` - registers an event listener on the current element.
+* `when(name: String, callback: Function) -> HTMLElement` - registers an event listener on the current element.
 
 Finally, the `use()` API can be used to add new functions to the prototype of `HTMLElement`. This is the easiest way to develop plugins for Chime. For example, to implement data-binding:
 
@@ -150,11 +150,10 @@ class Variable {
 
 
 use('binding', function(variable) {
-    this.oninput = value => variable.set(value)                    // View -> State.
-    variable.subscribe(value => this.setAttribute('value', value)) // State -> View.
-    
-    return this
-})
+
+    variable.subscribe(value => this.set('value', value))
+    return this.on('input', () => variable.set(this.value))
+}
 ```
 
 > Note that when writing plugins, you should typically return the current element to allow for further function chaining.
