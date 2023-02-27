@@ -6,9 +6,9 @@ const use = (name, value) => HTMLElement.prototype[name] = value
 
 use('Element', function(name) { return this.appendChild(document.createElement(name)) })
 
-use('attribute', function(name, value) { return (this.setAttribute(name, value), this) })
+use('set', function(name, value) { return (this.setAttribute(name, value), this) })
 
-use('event', function(name, value) { return (this.addEventListener(name, value), this) })
+use('on', function(name, value) { return (this.addEventListener(name, value), this) })
 
 use('text', function(value) { return (this.innerText = value, this) })
 
