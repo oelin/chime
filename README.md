@@ -99,12 +99,12 @@ Apart from constructing views, Chime also allows you to easily modify the conten
 Element('div').set('class', 'foo') // <div class='foo'></div>
 ```
 
-Another important function is `when()` which allows you to add event listeners to a DOM element. For example:
+Another important function is `on()` which allows you to add event listeners to a DOM element. For example:
 
 ```js
 Element('button')
    .text('Click me!')
-   .when('click', () => console.log('Button clicked!'))
+   .on('click', () => console.log('Button clicked!'))
 ```
 
 
@@ -131,16 +131,16 @@ The following functions are prototyped on `HTMLElement`:
 
 * `text(text: String) -> HTMLElement` - sets the `innerText` of the current element.
 
-* `html(html: String) -> HTMLElement` - sets the `innerHTML` of the current element.
-
 * `set(attribute: String, value: Any) -> HTMLElement` - sets an attribute on the current element.
+
+* `on(event: String, callback: Function) -> HTMLElement` - registers an event listener on the current element.
 
 Finally, the `use()` API can be used to add new functions to the prototype of `HTMLElement`. This is the easiest way to develop plug-ins for Chime. For example, to implement data-binding between input elements and refs, you could write a simple `bind` plug-in:
 
 ```js
 use('bind', function(ref) {
     ref.subscribe(value => this.set('value', value)) // Update the `value` attribute.
-    this.when('change', value => ref(value)) // Update the ref on input.
+    this.on('change', value => ref(value)) // Update the ref on input.
 })
 ```
 
