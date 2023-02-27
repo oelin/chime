@@ -4,23 +4,23 @@ A tiny declarative UI library.
 
 ```js
 const App = Element('div')
-        .Element('input')
-            .set('placholder', 'username')
-            .set('value', username)
-            .end()
-        .Element('input')
-            .set('placeholder', 'password')
-            .set('value', password)
+    .Element('input')
+        .set('placholder', 'username')
+        .set('value', username)
+        .end()
+    .Element('input')
+        .set('placeholder', 'password')
+        .set('value', password)
+        .end()
+    .Element('div')
+        .Element('h3')
+            .text('About you')
             .end()
         .Element('div')
-            .Element('h3')
-                .text('About you')
-                .end()
-            .Element('div')
-                .Element('textarea')
-                    .set('class', 'bio')
-                    .set('title', 'Enter your bio.')
-                    .top()
+            .Element('textarea')
+            .set('class', 'bio')
+            .set('title', 'Enter your bio.')
+            .top()
 ```
 
 <img src='https://github.com/oelin/chime/blob/main/images/form.png'>
@@ -49,6 +49,22 @@ Element('div')    // <div>
 The `.end()` method can be thought of like a closing tag for the current element. As such, it can be used to constructed nested DOMs. For example:
 
 ```js
-Element('div')
-    
+Element('div')       // <div>
+    .Element('p')    //     <p>
+        .text('foo') //         foo
+        .end()       //     </p>
+    .Element('div')  //     <div>
+        .text('bar') //         bar
+        .end()       //     </div>
+    .end()           // </div>
 ```
+
+Many HTML elements are tyically atomic, meaning they do not have any children (except text nodes). To reduce boilerplate in these cases, chime exports the `Atom()` function. This takes an element name and optional text content. For example, the example above can be simplified to.
+
+```js
+Element('div')           // <div>
+    .Atom('p', 'foo')    //     <p>foo</p>
+    .Atom('div', 'bar')  //     <div>bar</div>
+    .end()               // </div>
+```
+
