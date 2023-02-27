@@ -1,5 +1,5 @@
-export const Element = name => document.createElement(name)
-export const use = (name, value) => HTMLElement.prototype[name] = value
+const Element = name => document.createElement(name)
+const use = (name, value) => HTMLElement.prototype[name] = value
 
 
 // Default plugins.
