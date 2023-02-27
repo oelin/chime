@@ -15,13 +15,32 @@ const App = Element('div')
         .set('value', password)
         .end()
     .Element('div')
-        .Element('h3')
+        .Element('h6')
             .text('About you')
             .end()
         .Element('div')
             .Element('textarea')
             .set('class', 'bio')
-            .set('title', 'Enter your bio.')
+            .top()
+```
+
+```js
+const App = Element('div')
+    .Element('input')
+        .set('placholder', 'username')
+        .set('value', username)
+        .end()
+    .Element('input')
+        .set('placeholder', 'password')
+        .set('value', password)
+        .end()
+    .Element('div')
+        .Element('h6')
+            .text('About you')
+            .end()
+        .Element('div')
+            .Element('textarea')
+            .set('class', 'bio')
             .top()
 ```
 
@@ -62,32 +81,30 @@ Element('div')       // <div>
     .end()           // </div>
 ```
 
-Many HTML elements are tyically atomic, meaning they do not have any children (except text nodes). To reduce boilerplate in these cases, chime exports the `Atom()` function. This takes an element name and optional text content. For example, the example above can be simplified to.
-
-```js
-Element('div')          // <div>
-    .Atom('p', 'foo')   //     <p>foo</p>
-    .Atom('div', 'bar') //     <div>bar</div>
-    .end()              // </div>
-```
-
-Another piece of syntactic sugar provided by the library is `top()` which automatically closes all trailing elements. For example, consider this set of three nested `div` elements:
+To reduce boilerplate, Chime also provides the `top()` function which automatically closes all unclosed tags. For example, consider this set of nested `div` elements:
 
 ```js
 Element('div')
     .Element('div')
         .Element('div')
+            .Element('div')
+                Element('div')
+                    .end()
+                .end()
+            .end()
         .end()
     .end()
 ```
 
-Using `top()`, we can simplify this to:
+Using `top` we can divide the line count in half:
 
 ```js
 Element('div')
     .Element('div')
         .Element('div')
-        .top()
+            .Element('div')
+                .Element('div')
+                    .top()
 ```
 
 
