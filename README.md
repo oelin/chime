@@ -1,8 +1,8 @@
 # Chime
 
-A tiny declarative UI library.
+A tiny, declarative UI library.
 
-[Getting Started](#getting-started) | [Installation](#installation) | [API](#api)
+**[Getting Started](#getting-started) | [Installation](#installation) | [API](#api)**
 
 ```js
 const App = Element('div')
