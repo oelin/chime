@@ -25,6 +25,8 @@ function App() {
                 .element('textarea')
                     .set('class', 'bio')
                     .set('title', 'Enter your bio.')
-                    .end()
+                    .top()
 }
 ```
+
+<img src='https://github.com/oelin/chime/blob/main/images/form.png'>
