@@ -99,12 +99,12 @@ Apart from constructing views, Chime also allows you to easily modify the conten
 Element('div').set('class', 'foo') // <div class='foo'></div>
 ```
 
-Another important function is `on()` which allows you to add event listeners to a DOM element. For example:
+Another important function is `when()` which allows you to add event listeners to a DOM element. For example:
 
 ```js
 Element('button')
    .text('Click me!')
-   .on('click', () => console.log('Button clicked!'))
+   .when('click', () => console.log('Button clicked!'))
 ```
 
 
@@ -140,7 +140,7 @@ Finally, the `use()` API can be used to add new functions to the prototype of `H
 ```js
 use('bind', function(ref) {
     ref.subscribe(value => this.set('value', value)) // Update the `value` attribute.
-    this.on('change', value => ref(value)) // Update the ref on input.
+    this.when('change', value => ref(value)) // Update the ref on input.
 })
 ```
 
