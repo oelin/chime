@@ -5,14 +5,14 @@ A tiny, declarative UI framework.
 **[Getting Started](#getting-started) | [Installation](#installation) | [API](#api)**
 
 ```js
-const App = element('div')
+Element('div')
     .Element('input')
-        .set('placholder', 'username')
-        .set('value', username)
+        .attribute('placholder', 'username')
+        .attribute('value', username)
         .end()
     .Element('input')
-        .set('placeholder', 'password')
-        .set('value', password)
+        .attribute('placeholder', 'password')
+        .attribute('value', password)
         .end()
     .Element('div')
         .Element('h6')
@@ -20,14 +20,14 @@ const App = element('div')
             .end()
         .Element('div')
             .Element('textarea')
-                .set('class', 'bio')
+                .attribute('class', 'bio')
                 .top()
 ```
 
 <img src='https://github.com/oelin/chime/blob/main/images/form.png' width=100%>
 
- 
-## Getting Started 
+
+## Getting Started
 
 Chime is a tiny UI library which makes use of function chaining to construct UIs in a declarative style. The core library only contains a few DOM functions however it can be very easily extended via plugins using the `use()` API (for example to support two-way data binding). While Chime doesn't allow you to create views in HTML syntax, functional chaining allows you to achieve comparable succinctness while also being declarative.
 
@@ -93,7 +93,7 @@ Element('div')
 Apart from constructing views, Chime also allows you to easily modify the content and/or attributes of individual DOM elements. The `attribute()` function can be used to set an attribute on an element. For example:
 
 ```js
-Element('div').set('class', 'foo') // <div class='foo'></div>
+Element('div').attribute('class', 'foo') // <div class='foo'></div>
 ```
 
 Another important function is `when()` which allows you to add event listeners to elements. For example:
@@ -101,7 +101,7 @@ Another important function is `when()` which allows you to add event listeners t
 ```js
 Element('button')
    .text('Click me!')
-   .when('click', () => console.log('Button clicked!'))
+   .event('click', () => console.log('Button clicked!'))
 ```
 
 
@@ -122,7 +122,7 @@ The following functions are prototyped on `HTMLElement`:
 
 * `Element(name: String) -> HTMLElement` - adds a new child element to the current element.
 
-* `set(name: String, value: String) -> HTMLElement` - sets an attribute on the current element.
+* `attribute(name: String, value: String) -> HTMLElement` - sets an attribute on the current element.
 
 * `text(value: String) -> HTMLElement` - sets the `innerText` of the current element.
 
@@ -141,7 +141,7 @@ class Variable {
         this.value = value
         this.subscribers.forEach(callback => callback(value))
     }
-    
+
     subscribe(callback) {
         this.subscribers.push(callback)
         callback(this.value)
@@ -151,8 +151,8 @@ class Variable {
 
 use('binding', function(variable) {
 
-    variable.subscribe(value => this.set('value', value))
-    return this.on('input', () => variable.set(this.value))
+    variable.subscribe(value => this.attribute('value', value))
+    return this.event('input', () => variable.attribute(this.value))
 }
 ```
 
@@ -163,7 +163,7 @@ This function can then be used when constructing views:
 ```js
 function App() {
     const username = new Variable('Alice')
-    
+
     return Element('div')
         .Element('input').binding(username)
         .top()
