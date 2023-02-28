@@ -5,23 +5,20 @@ A tiny, declarative UI framework.
 **[Getting Started](#getting-started) | [Installation](#installation) | [API](#api)**
 
 ```js
-Element('div')
-    .Element('input')
-        .attribute('placholder', 'username')
-        .attribute('value', username)
-        .end()
-    .Element('input')
-        .attribute('placeholder', 'password')
-        .attribute('value', password)
-        .end()
-    .Element('div')
-        .Element('h6')
-            .text('About you')
+function App() {
+    const username = ref('Alice')
+    const password = ref('')
+
+    return element('div')
+        .element('input')
+            .set('placholder', 'username')
+            .set('value', username)
             .end()
-        .Element('div')
-            .Element('textarea')
-                .attribute('class', 'bio')
-                .top()
+        .element('input')
+            .set('placeholder', 'password')
+            .set('value', password)
+            .end()
+}
 ```
 
 <img src='https://github.com/oelin/chime/blob/main/images/form.png' width=100%>
